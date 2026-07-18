@@ -1,0 +1,35 @@
+.brand {
+  text-align: center;
+
+  &__icon {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 12px;
+    place-items: center;
+    border: 1px solid rgb(255 255 255 / 72%);
+    border-radius: 22px;
+    color: var(--ion-color-primary);
+    background: rgb(255 255 255 / 76%);
+    box-shadow: 0 12px 34px rgb(42 111 151 / 16%);
+    backdrop-filter: blur(12px);
+  }
+
+  ion-icon {
+    font-size: 34px;
+  }
+
+  h1 {
+    margin: 0;
+    color: var(--mm-ink);
+    font-size: clamp(1.85rem, 8vw, 2.2rem);
+    font-weight: 750;
+    letter-spacing: -0.045em;
+  }
+
+  p {
+    margin: 6px 0 0;
+    color: var(--mm-muted);
+    font-size: 0.96rem;
+  }
+}

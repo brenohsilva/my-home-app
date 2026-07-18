@@ -1,0 +1,110 @@
+# Minha Morada — aplicativo mobile
+
+Frontend mobile do **Minha Morada**, aplicativo para acompanhar a jornada de compra de um imóvel, da aquisição à entrega das chaves. Esta primeira entrega contém autenticação, cadastro e uma home protegida de confirmação.
+
+## Stack
+
+- Angular 21 LTS, standalone components e Reactive Forms
+- Ionic 8
+- Capacitor 7
+- TypeScript 5.9 e SCSS
+- Vitest e ESLint
+
+Angular 21 e Capacitor 7 foram escolhidos por serem versões estáveis compatíveis com o Node.js 20 usado no projeto. O Capacitor 8 exige Node.js 22.
+
+## Requisitos
+
+- Node.js 20.19 ou superior
+- npm 10 ou superior
+- API Minha Morada em execução na porta `3000`
+- Android Studio e SDK Android apenas para executar o app nativo
+- macOS e Xcode apenas para gerar/executar iOS
+
+## Instalação e desenvolvimento
+
+```bash
+cd APP
+npm install
+npm start
+```
+
+Abra `http://localhost:4200`. Em desenvolvimento, `proxy.conf.json` encaminha `/api` para `http://localhost:3000`, evitando URLs fixas e contornando CORS no navegador local.
+
+## Configuração da API
+
+- Desenvolvimento: `src/environments/environment.ts` usa `/api` com o proxy local.
+- Produção/mobile: altere `apiUrl` em `src/environments/environment.production.ts` para o endereço HTTPS público real antes do build.
+- Timeout padrão: 15 segundos, configurado nos environments.
+
+### Atenção: CORS no backend
+
+No estado atual, a API não chama `enableCors()` no bootstrap. O proxy resolve isso somente durante `npm start`. Para um build web publicado ou uma chamada feita pelo WebView do Capacitor, o backend deverá liberar explicitamente as origens confiáveis do aplicativo. O backend não foi modificado nesta entrega.
+
+## Comandos
+
+```bash
+npm start              # servidor de desenvolvimento com proxy
+npm run lint           # análise estática
+npm test               # testes unitários, uma execução
+npm run build          # build de produção
+npm run cap:sync       # build e sincronização dos projetos nativos
+npx cap sync           # sincronização sem executar o build
+npx cap open android   # abre o projeto Android no Android Studio
+```
+
+Para adicionar uma plataforma em uma nova máquina, caso a pasta nativa ainda não exista:
+
+```bash
+npx cap add android
+npx cap add ios
+```
+
+## Rotas
+
+| Rota        | Acesso    | Finalidade                          |
+| ----------- | --------- | ----------------------------------- |
+| `/login`    | Pública   | Autenticação                        |
+| `/register` | Pública   | Criação de conta e login automático |
+| `/home`     | Protegida | Placeholder para validar a sessão   |
+
+Rotas desconhecidas e a raiz redirecionam para `/login`. O `AuthGuard` bloqueia `/home` quando não existe access token.
+
+## Endpoints utilizados
+
+| Endpoint              | Request                     | Response principal                    |
+| --------------------- | --------------------------- | ------------------------------------- |
+| `POST /auth/register` | `{ name, email, password }` | `{ user, accessToken, refreshToken }` |
+| `POST /auth/login`    | `{ email, password }`       | `{ user, accessToken, refreshToken }` |
+| `POST /auth/refresh`  | `{ refreshToken }`          | `{ user, accessToken, refreshToken }` |
+| `GET /auth/me`        | Bearer access token         | usuário público                       |
+
+Os contratos refletem diretamente os DTOs da API. O cadastro valida nome entre 2 e 120 caracteres, email válido e senha entre 8 e 72 caracteres. `confirmPassword` existe somente no formulário do frontend e não é enviado ao backend.
+
+Como o cadastro já retorna os tokens e o usuário, a aplicação salva a sessão e segue diretamente para `/home`.
+
+## Arquitetura de autenticação
+
+```text
+src/app/
+├── core/auth/
+│   ├── guards/          # proteção de rotas
+│   ├── interceptors/    # Bearer e renovação em respostas 401
+│   ├── models/          # requests e responses da API
+│   └── services/        # AuthService e armazenamento de tokens
+├── features/
+│   ├── auth/pages/      # Login e Cadastro
+│   └── home/pages/      # Home placeholder
+└── shared/components/   # Marca e navegação compartilhadas
+```
+
+O interceptor inclui `Authorization: Bearer` apenas nas chamadas privadas da API. Em um `401`, usa o refresh token rotativo e repete a requisição uma vez. A operação de refresh é compartilhada (`shareReplay`), evitando várias renovações simultâneas. Se ela falhar, a sessão local é apagada e o usuário volta ao login.
+
+## Gerenciamento de tokens
+
+`TokenStorageService` centraliza todo o acesso aos tokens e usa `@capacitor/preferences`. Isso é melhor que espalhar chamadas a `localStorage` e funciona em web e Capacitor.
+
+`Preferences` não é um cofre criptográfico. Antes de uma publicação que exija maior proteção contra comprometimento do dispositivo, substitua somente essa implementação por Keychain (iOS) e Keystore/EncryptedSharedPreferences (Android), mantendo os consumidores inalterados. Access e refresh tokens nunca são exibidos em logs ou mensagens.
+
+## UX mobile
+
+As páginas usam componentes Ionic, safe areas, scroll do `ion-content`, inputs com autocomplete e teclado apropriado, botões com área de toque confortável e estados de loading. O layout foi ajustado para larguras a partir de 320 px, com foco em 360×800, 390×844 e 412×915.

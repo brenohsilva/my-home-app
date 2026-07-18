@@ -1,0 +1,90 @@
+<ion-content [fullscreen]="true" class="auth-content">
+  <main class="auth-shell">
+    <app-auth-brand />
+
+    <section class="auth-card" aria-labelledby="login-title">
+      <div class="auth-card__heading">
+        <span class="eyebrow">Boas-vindas</span>
+        <h2 id="login-title">Acesse sua jornada</h2>
+        <p>Acompanhe seu imóvel com calma e segurança.</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field">
+          <ion-input
+            formControlName="email"
+            type="email"
+            label="Email"
+            labelPlacement="floating"
+            fill="outline"
+            autocomplete="email"
+            inputmode="email"
+            enterkeyhint="next"
+            errorText=" "
+          >
+            <ion-icon slot="start" name="mail-outline" aria-hidden="true" />
+          </ion-input>
+          @if (showError('email', 'required')) {
+            <p class="field-error">Email obrigatório.</p>
+          } @else if (showError('email', 'email')) {
+            <p class="field-error">Informe um email válido.</p>
+          }
+        </div>
+
+        <div class="field">
+          <ion-input
+            formControlName="password"
+            [type]="passwordVisible() ? 'text' : 'password'"
+            label="Senha"
+            labelPlacement="floating"
+            fill="outline"
+            autocomplete="current-password"
+            enterkeyhint="done"
+            errorText=" "
+          >
+            <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true" />
+            <ion-button
+              slot="end"
+              fill="clear"
+              type="button"
+              class="password-toggle"
+              [attr.aria-label]="passwordVisible() ? 'Ocultar senha' : 'Mostrar senha'"
+              (click)="togglePassword()"
+            >
+              <ion-icon
+                slot="icon-only"
+                [name]="passwordVisible() ? 'eye-off-outline' : 'eye-outline'"
+              />
+            </ion-button>
+          </ion-input>
+          @if (showError('password', 'required')) {
+            <p class="field-error">Senha obrigatória.</p>
+          }
+        </div>
+
+        <button type="button" class="text-action" aria-label="Esqueci minha senha, em breve">
+          Esqueci minha senha
+        </button>
+
+        @if (errorMessage()) {
+          <div class="form-alert" role="alert">{{ errorMessage() }}</div>
+        }
+
+        <ion-button class="primary-action" expand="block" type="submit" [disabled]="loading()">
+          @if (loading()) {
+            <ion-spinner name="crescent" aria-label="Entrando" />
+          } @else {
+            <ion-icon slot="start" name="log-in-outline" />
+            Entrar
+          }
+        </ion-button>
+      </form>
+    </section>
+
+    <app-auth-footer
+      primaryLabel="Criar uma conta"
+      primaryLink="/register"
+      primaryIcon="person-add-outline"
+    />
+  </main>
+</ion-content>

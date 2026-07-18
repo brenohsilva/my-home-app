@@ -1,0 +1,48 @@
+.auth-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.auth-link {
+  display: flex;
+  min-height: 76px;
+  padding: 12px 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid rgb(86 153 190 / 22%);
+  border-radius: 20px;
+  color: var(--mm-ink);
+  background: rgb(255 255 255 / 64%);
+  box-shadow: 0 8px 24px rgb(44 109 145 / 8%);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition:
+    transform 120ms ease,
+    background 120ms ease;
+
+  &:active {
+    transform: scale(0.98);
+    background: rgb(255 255 255 / 84%);
+  }
+
+  ion-icon {
+    color: var(--ion-color-primary);
+    font-size: 21px;
+  }
+
+  span {
+    font-size: 0.86rem;
+    font-weight: 650;
+  }
+
+  small {
+    color: var(--mm-muted);
+    font-size: 0.67rem;
+  }
+}

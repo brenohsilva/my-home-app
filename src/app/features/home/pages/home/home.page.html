@@ -1,0 +1,24 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Minha Morada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <main class="home-shell">
+    <div class="home-icon" aria-hidden="true">
+      <ion-icon name="home-outline" />
+    </div>
+    <p class="eyebrow">Jornada iniciada</p>
+    <h1>Bem-vindo ao Minha Morada</h1>
+    @if (user(); as currentUser) {
+      <p>Olá, {{ currentUser.name }}. Em breve, sua jornada do imóvel aparecerá aqui.</p>
+    } @else {
+      <p>Em breve, sua jornada do imóvel aparecerá aqui.</p>
+    }
+    <ion-button fill="outline" (click)="logout()" [disabled]="loading()">
+      <ion-icon slot="start" name="log-out-outline" />
+      Sair
+    </ion-button>
+  </main>
+</ion-content>

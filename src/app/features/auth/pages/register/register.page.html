@@ -1,0 +1,141 @@
+<ion-content [fullscreen]="true" class="auth-content">
+  <main class="auth-shell auth-shell--register">
+    <app-auth-brand />
+
+    <section class="auth-card" aria-labelledby="register-title">
+      <div class="auth-card__heading">
+        <span class="eyebrow">Sua nova morada</span>
+        <h2 id="register-title">Crie sua conta</h2>
+        <p>Comece agora a acompanhar cada etapa dessa conquista.</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field">
+          <ion-input
+            formControlName="name"
+            type="text"
+            label="Nome"
+            labelPlacement="floating"
+            fill="outline"
+            autocomplete="name"
+            enterkeyhint="next"
+            errorText=" "
+          >
+            <ion-icon slot="start" name="person-outline" aria-hidden="true" />
+          </ion-input>
+          @if (showError('name', 'required')) {
+            <p class="field-error">Nome obrigatório.</p>
+          } @else if (showError('name', 'minlength')) {
+            <p class="field-error">Informe pelo menos 2 caracteres.</p>
+          }
+        </div>
+
+        <div class="field">
+          <ion-input
+            formControlName="email"
+            type="email"
+            label="Email"
+            labelPlacement="floating"
+            fill="outline"
+            autocomplete="email"
+            inputmode="email"
+            enterkeyhint="next"
+            errorText=" "
+          >
+            <ion-icon slot="start" name="mail-outline" aria-hidden="true" />
+          </ion-input>
+          @if (showError('email', 'required')) {
+            <p class="field-error">Email obrigatório.</p>
+          } @else if (showError('email', 'email')) {
+            <p class="field-error">Informe um email válido.</p>
+          }
+        </div>
+
+        <div class="field">
+          <ion-input
+            formControlName="password"
+            [type]="passwordVisible() ? 'text' : 'password'"
+            label="Senha"
+            labelPlacement="floating"
+            fill="outline"
+            autocomplete="new-password"
+            enterkeyhint="next"
+            errorText=" "
+          >
+            <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true" />
+            <ion-button
+              slot="end"
+              fill="clear"
+              type="button"
+              class="password-toggle"
+              [attr.aria-label]="passwordVisible() ? 'Ocultar senha' : 'Mostrar senha'"
+              (click)="togglePassword('password')"
+            >
+              <ion-icon
+                slot="icon-only"
+                [name]="passwordVisible() ? 'eye-off-outline' : 'eye-outline'"
+              />
+            </ion-button>
+          </ion-input>
+          @if (showError('password', 'required')) {
+            <p class="field-error">Senha obrigatória.</p>
+          } @else if (showError('password', 'minlength')) {
+            <p class="field-error">A senha deve ter pelo menos 8 caracteres.</p>
+          }
+        </div>
+
+        <div class="field">
+          <ion-input
+            formControlName="confirmPassword"
+            [type]="confirmPasswordVisible() ? 'text' : 'password'"
+            label="Confirmar senha"
+            labelPlacement="floating"
+            fill="outline"
+            autocomplete="new-password"
+            enterkeyhint="done"
+            errorText=" "
+          >
+            <ion-icon slot="start" name="shield-checkmark-outline" aria-hidden="true" />
+            <ion-button
+              slot="end"
+              fill="clear"
+              type="button"
+              class="password-toggle"
+              [attr.aria-label]="confirmPasswordVisible() ? 'Ocultar senha' : 'Mostrar senha'"
+              (click)="togglePassword('confirmPassword')"
+            >
+              <ion-icon
+                slot="icon-only"
+                [name]="confirmPasswordVisible() ? 'eye-off-outline' : 'eye-outline'"
+              />
+            </ion-button>
+          </ion-input>
+          @if (showError('confirmPassword', 'required')) {
+            <p class="field-error">Confirme sua senha.</p>
+          } @else if (passwordsMismatch()) {
+            <p class="field-error">As senhas não coincidem.</p>
+          }
+        </div>
+
+        @if (errorMessage()) {
+          <div class="form-alert" role="alert">{{ errorMessage() }}</div>
+        }
+
+        <ion-button class="primary-action" expand="block" type="submit" [disabled]="loading()">
+          @if (loading()) {
+            <ion-spinner name="crescent" aria-label="Criando conta" />
+          } @else {
+            <ion-icon slot="start" name="person-add-outline" />
+            Criar conta
+          }
+        </ion-button>
+      </form>
+    </section>
+
+    <app-auth-footer
+      primaryLabel="Acesse sua conta"
+      primaryLink="/login"
+      primaryIcon="log-in-outline"
+    />
+  </main>
+</ion-content>
