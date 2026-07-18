@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://my-home-api.vercel.app/',
   requestTimeoutMs: 15_000,
 } as const;
