@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  // Substitua pelo endereço HTTPS público da API antes de publicar o aplicativo.
-  apiUrl: 'https://api.minha-morada.example',
+
+  apiUrl: 'https://my-home-api.vercel.app/',
   requestTimeoutMs: 15_000,
 } as const;
