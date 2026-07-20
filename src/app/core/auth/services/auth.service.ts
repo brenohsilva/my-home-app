@@ -97,6 +97,10 @@ export class AuthService {
   }
 
   friendlyError(error: unknown, action: 'login' | 'register'): string {
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+      return 'Você está sem conexão com a internet. Verifique sua conexão e tente novamente.';
+    }
+
     if (!(error instanceof HttpErrorResponse)) {
       return error instanceof Error && error.name === 'TimeoutError'
         ? 'O servidor demorou para responder. Tente novamente.'

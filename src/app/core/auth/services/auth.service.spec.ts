@@ -26,4 +26,14 @@ describe('AuthService', () => {
     expect(message).not.toContain('500');
     expect(message).not.toContain('Internal Server Error');
   });
+
+  it('shows a friendly message when the browser is offline', () => {
+    const online = vi.spyOn(window.navigator, 'onLine', 'get').mockReturnValue(false);
+
+    expect(service.friendlyError(new HttpErrorResponse({ status: 0 }), 'login')).toBe(
+      'Você está sem conexão com a internet. Verifique sua conexão e tente novamente.',
+    );
+
+    online.mockRestore();
+  });
 });

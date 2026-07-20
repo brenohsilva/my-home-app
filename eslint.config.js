@@ -27,6 +27,6 @@ module.exports = tseslint.config(
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
   },
   {
-    ignores: ['dist/**', 'node_modules/**', 'android/**', 'ios/**'],
+    ignores: ['.angular/**', 'dist/**', 'node_modules/**', 'android/**', 'ios/**'],
   },
 );

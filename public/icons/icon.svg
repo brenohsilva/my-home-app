@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Minha Morada">
+  <rect width="512" height="512" fill="#edf8ff" />
+  <rect x="80" y="80" width="352" height="352" rx="112" fill="#ffffff" fill-opacity="0.78" />
+  <g fill="none" stroke="#2f92c8" stroke-linecap="round" stroke-linejoin="round" stroke-width="28">
+    <path d="M142 235v142a14 14 0 0 0 14 14h64v-91a20 20 0 0 1 20-20h32a20 20 0 0 1 20 20v91h64a14 14 0 0 0 14-14V235" />
+    <path d="m112 270 134-128a15 15 0 0 1 20 0l134 128" />
+  </g>
+</svg>

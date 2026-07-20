@@ -1,0 +1,23 @@
+{
+  "id": "/",
+  "name": "Minha Morada",
+  "short_name": "Minha Morada",
+  "description": "Com você desde o início",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#edf8ff",
+  "background_color": "#edf8ff",
+  "categories": ["lifestyle", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

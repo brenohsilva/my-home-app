@@ -1,3 +1,11 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <ion-toast
+    [isOpen]="pwaUpdate.updateAvailable()"
+    message="Uma nova versão do Minha Morada está disponível."
+    position="bottom"
+    [duration]="0"
+    [buttons]="updateToastButtons"
+    (didDismiss)="pwaUpdate.dismissUpdate()"
+  />
 </ion-app>
