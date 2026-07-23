@@ -1,24 +1,65 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title>Minha Morada</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="home-content">
+  <div class="dashboard">
+    <header class="dashboard-header">
+      <p class="greeting">{{ greeting() }}</p>
+      <button type="button" class="home-button" aria-label="Início">
+        <ion-icon name="home-outline" aria-hidden="true" />
+      </button>
+    </header>
 
-<ion-content [fullscreen]="true">
-  <main class="home-shell">
-    <div class="home-icon" aria-hidden="true">
-      <ion-icon name="home-outline" />
-    </div>
-    <p class="eyebrow">Jornada iniciada</p>
-    <h1>Bem-vindo ao Minha Morada</h1>
-    @if (user(); as currentUser) {
-      <p>Olá, {{ currentUser.name }}. Em breve, sua jornada do imóvel aparecerá aqui.</p>
-    } @else {
-      <p>Em breve, sua jornada do imóvel aparecerá aqui.</p>
-    }
-    <ion-button fill="outline" (click)="logout()" [disabled]="loading()">
-      <ion-icon slot="start" name="log-out-outline" />
-      Sair
-    </ion-button>
-  </main>
+    <main class="dashboard-body">
+      <section class="progress-card" aria-labelledby="journey-title">
+        <div class="progress-card__intro">
+          <div class="feature-icon feature-icon--large" aria-hidden="true">
+            <ion-icon name="navigate-outline" />
+          </div>
+          <div>
+            <h1 id="journey-title">Para começar a visualizar a trajetória do seu sonho...</h1>
+            <p>Cadastre algumas informações</p>
+          </div>
+        </div>
+
+        <div class="journey-progress" role="progressbar" aria-label="Progresso do cadastro" aria-valuemin="0"
+          aria-valuemax="100" aria-valuenow="25">
+          <span class="journey-progress__bar"><span></span></span>
+          <span class="journey-progress__label">25% concluído</span>
+        </div>
+      </section>
+      <div>
+        <h5 style="font-weight: bold;">Mais informações</h5>
+      </div>
+      <nav class="quick-links" aria-label="Acesso rápido">
+        <button type="button" class="quick-link">
+          <span class="feature-icon" aria-hidden="true">
+            <ion-icon name="book-outline" />
+          </span>
+          <span class="quick-link__label">Como funciona o Minha Morada</span>
+          <ion-icon class="quick-link__arrow" name="chevron-forward-outline" aria-hidden="true" />
+        </button>
+
+        <button type="button" class="quick-link">
+          <span class="feature-icon" aria-hidden="true">
+            <ion-icon name="business-outline" />
+          </span>
+          <span class="quick-link__label">Evolução de obras</span>
+          <ion-icon class="quick-link__arrow" name="chevron-forward-outline" aria-hidden="true" />
+        </button>
+        <button type="button" class="quick-link">
+          <span class="feature-icon" aria-hidden="true">
+            <ion-icon name="pie-chart-outline" />
+          </span>
+          <span class="quick-link__label">Total investido até aqui</span>
+          <ion-icon class="quick-link__arrow" name="chevron-forward-outline" aria-hidden="true" />
+        </button>
+
+        <button type="button" class="quick-link">
+          <span class="feature-icon" aria-hidden="true">
+            <ion-icon name="calendar-outline" />
+          </span>
+          <span class="quick-link__label">Próximos pagamentos</span>
+          <ion-icon class="quick-link__arrow" name="chevron-forward-outline" aria-hidden="true" />
+        </button>
+      </nav>
+    </main>
+  </div>
 </ion-content>
