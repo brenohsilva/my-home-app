@@ -19,14 +19,20 @@
           </div>
         </div>
 
-        <div class="journey-progress" role="progressbar" aria-label="Progresso do cadastro" aria-valuemin="0"
-          aria-valuemax="100" aria-valuenow="25">
+        <div
+          class="journey-progress"
+          role="progressbar"
+          aria-label="Progresso do cadastro"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="25"
+        >
           <span class="journey-progress__bar"><span></span></span>
           <span class="journey-progress__label">25% concluído</span>
         </div>
       </section>
       <div>
-        <h5 style="font-weight: bold;">Mais informações</h5>
+        <h5 style="font-weight: bold">Mais informações</h5>
       </div>
       <nav class="quick-links" aria-label="Acesso rápido">
         <button type="button" class="quick-link">
@@ -62,4 +68,30 @@
       </nav>
     </main>
   </div>
+
+  <nav slot="fixed" class="bottom-navigation" aria-label="Navegação principal">
+    <button
+      type="button"
+      class="bottom-navigation__item bottom-navigation__item--active"
+      aria-current="page"
+    >
+      <ion-icon name="home-outline" aria-hidden="true" />
+      <span>Início</span>
+    </button>
+
+    <button type="button" class="bottom-navigation__item">
+      <ion-icon name="wallet-outline" aria-hidden="true" />
+      <span>Investimento</span>
+    </button>
+
+    <button type="button" class="bottom-navigation__item">
+      <ion-icon name="business-outline" aria-hidden="true" />
+      <span>Obras</span>
+    </button>
+
+    <button type="button" class="bottom-navigation__item">
+      <ion-icon name="help-circle-outline" aria-hidden="true" />
+      <span>Dúvidas</span>
+    </button>
+  </nav>
 </ion-content>

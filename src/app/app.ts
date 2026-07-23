@@ -4,17 +4,25 @@ import { IonApp, IonRouterOutlet, IonToast } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   arrowBackOutline,
+  bookOutline,
+  businessOutline,
+  calendarOutline,
+  chevronForwardOutline,
   eyeOffOutline,
   eyeOutline,
+  helpCircleOutline,
   homeOutline,
   informationCircleOutline,
   lockClosedOutline,
   logInOutline,
   logOutOutline,
   mailOutline,
+  navigateOutline,
+  pieChartOutline,
   personAddOutline,
   personOutline,
   shieldCheckmarkOutline,
+  walletOutline,
 } from 'ionicons/icons';
 import { PwaInstallService } from './core/pwa/pwa-install.service';
 import { PwaUpdateService } from './core/pwa/pwa-update.service';
@@ -43,17 +51,25 @@ export class App {
   constructor() {
     addIcons({
       arrowBackOutline,
+      bookOutline,
+      businessOutline,
+      calendarOutline,
+      chevronForwardOutline,
       eyeOffOutline,
       eyeOutline,
+      helpCircleOutline,
       homeOutline,
       informationCircleOutline,
       lockClosedOutline,
       logInOutline,
       logOutOutline,
       mailOutline,
+      navigateOutline,
+      pieChartOutline,
       personAddOutline,
       personOutline,
       shieldCheckmarkOutline,
+      walletOutline,
     });
   }
 }
